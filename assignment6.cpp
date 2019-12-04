@@ -9,6 +9,18 @@
 #include <iomanip>
 
 
+float calculator(float circular, float side) {
+    float result;
+    // Process
+    if (side > 0 && circular > 0) {
+        result = pow(circular, 2) * M_PI + 2 * circular * side;
+    } else {
+        result = -1;
+    }
+    return result;
+}
+
+
 main() {
     // This function gets the input and calls another function
     std::string side_str;
@@ -24,15 +36,18 @@ main() {
                  "between the semicuriculars: ";
     std::cin >> side_str;
     try {
-        side = std::stoi(side_str);
-        circular = std::stoi(circular_str);
+        side = std::stof(side_str);
+        circular = std::stof(circular_str);
     } catch (std::invalid_argument) {
         std::cout << "Wrong input!!!" << std::endl;
         return 0;
     }
-    // Process and Output
-    if (side > 0 && circular > 0) {
-        result = pow(circular, 2) * M_PI + 2 * circular * side;
+
+    // call another function
+    result = calculator(circular, side);
+
+    // Output
+    if (result != -1) {
         std::cout << "The area of the stadium is approximately " << std::fixed
         << std::setprecision(2) << std::setfill('0')  << result << "m^2"
         << std::endl;
